@@ -1,0 +1,28 @@
+div#bg {
+    height: 100%;
+    width: 100%;
+    background-image: url('wallpaper_minecraft_ocean_monument_2560x1440.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.1s;
+}
+
+div#bg-container {
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+
+div#copyright {
+    color: var(--theme-color1);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    padding: 2px;
+}
