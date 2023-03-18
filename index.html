@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/login.css">
     <link rel="stylesheet" href="assets/bg.css">
-    <script src="assets/movement.js" defer></script>
+    <link rel="stylesheet" href="assets/notice.css">
+    <script src="assets/main.js" defer></script>
+    <script src="assets/mousemove.js" defer></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
 </head>
 
 <body>
@@ -18,15 +21,16 @@
         <div id="bg" class="movement-follow-mouse"></div>
         <div id="copyright">Copyright © 2023 Zaitonn. All Rights Reserved.</div>
     </div>
+    <div id="notice-container"></div>
     <div id="login-container">
         <div id="login-body">
-            <div>WebConsole · 登录</div>
+            <div>WebConsole · 开始</div>
             <div class="bar-container">
-                <input type="text" placeholder="ws地址">
+                <input type="text" placeholder="ws地址" id="login-addr">
                 <div class="bar"></div>
             </div>
             <div class="bar-container">
-                <input type="password" placeholder="密码">
+                <input type="password" placeholder="密码" id="login-pwd">
                 <div class="bar"></div>
             </div>
             <div class="bar-container">

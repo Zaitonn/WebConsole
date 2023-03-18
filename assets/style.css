@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 :root{
     --theme-color: #1b7bbb;
     --theme-color1: #abbac4;
@@ -10,5 +11,5 @@ body {
     --theme-color3: #6c9ebe;
     --theme-color4: #5196c0;
     --theme-color5: #3288bd;
-    --theme-color-dark: #0c3957;
+    --theme-color-dark: #072030;
 }

@@ -36,11 +36,8 @@ div#login-body input {
     background: transparent;
     border: none;
     transition: border-bottom 0.2s;
-    border-bottom: var(--theme-color1) solid 1px;
-}
-
-div#login-body input:focus {
     border-bottom: transparent solid 1px;
+    color: var(--theme-color-dark);
 }
 
 div#login-body div.bar-container {
@@ -51,7 +48,7 @@ div#login-body div.bar {
     content: '1';
     width: 100%;
     height: 1.5px;
-    transition: 0.2s;
+    transition: 0.3s;
     transform: scale(0);
     background-color: var(--theme-color2);
     margin: 0 0 10px 0;
@@ -68,4 +65,17 @@ div#login-body button#login-btn {
     background: transparent;
     border: none;
     padding: 5px;
+    border-radius: 0;
+}
+
+@media only screen and (max-width:768px) {
+    div#login-body div:first-child {
+        font-size: large;
+    }
+
+    div#login-body {
+        min-width: 200px;
+        margin: 20px;
+        padding: 20px;
+    }
 }
