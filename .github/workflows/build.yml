@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  Build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Build the solution
+        run: |
+          dotnet restore
+          dotnet build
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin
+          path: ${{ github.workspace }}\WebConsole\bin\
