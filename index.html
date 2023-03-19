@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebConsole</title>
     <link rel="shortcut icon" href="sources/ico.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/login.css">
     <link rel="stylesheet" href="assets/bg.css">
+    <link rel="stylesheet" href="assets/connectBody.css">
     <link rel="stylesheet" href="assets/notice.css">
+    <link rel="stylesheet" href="assets/panel.css">
+    <link rel="stylesheet" href="assets/style.css">
     <script src="assets/main.js" defer></script>
     <script src="assets/mousemove.js" defer></script>
     <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
@@ -22,21 +23,35 @@
         <div id="copyright">Copyright © 2023 Zaitonn. All Rights Reserved.</div>
     </div>
     <div id="notice-container"></div>
-    <div id="login-container">
-        <div id="login-body">
+    <div id="connect-container">
+        <div id="connect-body">
             <div>WebConsole · 开始</div>
             <div class="bar-container">
-                <input type="text" placeholder="ws地址" id="login-addr">
+                <input type="text" placeholder="ws地址" id="connect-addr">
                 <div class="bar"></div>
             </div>
             <div class="bar-container">
-                <input type="password" placeholder="密码" id="login-pwd">
+                <input type="password" placeholder="密码" id="connect-pwd">
                 <div class="bar"></div>
             </div>
             <div class="bar-container">
-                <button id="login-btn">连接</button>
+                <button id="connect-btn">连接</button>
                 <div class="bar"></div>
             </div>
+        </div>
+    </div>
+    <div id="panel-container" class="hide">
+        <nav>
+            <div id="panel-title">
+                WebConsole
+            </div>
+            <div id="panel-state">
+                <span id="panel-connection-state">●</span>
+                <span id="panel-addr"></span>
+            </div>
+        </nav>
+        <div id="panel-main">
+            这里啥都没有啊
         </div>
     </div>
 

@@ -2,19 +2,20 @@
     let ws = null;
     let noticeContainer = document.querySelector('#notice-container'), currentNotices = [];
     let addr, pwd;
+    let connected = false;
 
     restoreFromUrl();
 
-    document.querySelector('#login-body button#login-btn').addEventListener('click', tryConnect);
-    document.querySelector('#login-body input#login-addr').addEventListener('keydown', (ev) => ev.keyCode === 13 && document.querySelector('#login-body input#login-pwd').focus());
-    document.querySelector('#login-body input#login-pwd').addEventListener('keydown', (ev) => ev.keyCode === 13 && tryConnect());
+    document.querySelector('#connect-body button#connect-btn').addEventListener('click', tryConnect);
+    document.querySelector('#connect-body input#connect-addr').addEventListener('keydown', (ev) => ev.keyCode === 13 && document.querySelector('#connect-body input#connect-pwd').focus());
+    document.querySelector('#connect-body input#connect-pwd').addEventListener('keydown', (ev) => ev.keyCode === 13 && tryConnect());
 
     /**
      * 更新输入内容
      */
     function updateInput() {
-        addr = document.querySelector('#login-body input#login-addr').value.trim();
-        pwd = document.querySelector('#login-body input#login-pwd').value;
+        addr = document.querySelector('#connect-body input#connect-addr').value.trim();
+        pwd = document.querySelector('#connect-body input#connect-pwd').value;
     }
 
     /**
@@ -23,19 +24,23 @@
     function restoreFromUrl() {
         let url = new URL(window.location.href);
         if (url.searchParams.has('addr'))
-            document.querySelector('#login-body input#login-addr').value = url.searchParams.get('addr');
+            document.querySelector('#connect-body input#connect-addr').value = url.searchParams.get('addr');
 
         updateInput();
+
+        if (url.searchParams.has('debug'))
+            showPanel();
+
     }
 
     /**
      * 尝试连接
      */
     function tryConnect() {
-        if (checkLoginInput())
+        if (checkConnectInput())
             if (ws === null || ws.readyState === 3) {
                 try {
-                    ws = new WebSocket(document.querySelector('#login-body input#login-addr').value.trim());
+                    ws = new WebSocket(document.querySelector('#connect-body input#connect-addr').value.trim());
                     ws.onopen = onOpen;
                     ws.onclose = onClose;
                     ws.onmessage = onMessage;
@@ -50,24 +55,24 @@
      * 检查输入
      * @returns 结果
      */
-    function checkLoginInput() {
+    function checkConnectInput() {
         updateInput();
 
         if (!addr) {
             createNotice(1, 'ws地址栏为空');
-            document.querySelector('#login-body input#login-addr').focus();
+            document.querySelector('#connect-body input#connect-addr').focus();
             return false;
         }
 
-        if (!/^wss?:\/\/[\w\-\./]/.test(addr)) {
+        if (!/^wss?:\/\//.test(addr)) {
             createNotice(1, 'ws地址不正确');
-            document.querySelector('#login-body input#login-addr').focus();
+            document.querySelector('#connect-body input#connect-addr').focus();
             return false;
         }
 
         if (!pwd) {
             createNotice(1, '密码为空');
-            document.querySelector('#login-body input#login-pwd').focus();
+            document.querySelector('#connect-body input#connect-pwd').focus();
             return false;
         }
 
@@ -81,18 +86,32 @@
      * @param {Number} level 等级
      * @param {String} text 文本
      */
-    function createNotice(level = 0, text = null) {
+    function createNotice(level = 0, text = null, close = true) {
         console.log(text);
         if (noticeContainer.childElementCount > 10 || currentNotices.includes(text))
             return;
+
         currentNotices.push(text);
         let div = document.createElement('div');
         div.classList.add('notice');
         div.innerHTML += `<span class='symbol-${['info', 'warn', 'error'][level]} symbol'>!</span><span>${text}</span>`;
         noticeContainer.appendChild(div);
         setTimeout(() => div.setAttribute('style', 'transform: none'), 20);
-        setTimeout(() => div.setAttribute('style', '') || currentNotices.shift(), 5000);
-        setTimeout(() => noticeContainer.removeChild(div), 5500);
+
+        if (close) {
+            setTimeout(() => noticeContainer.removeChild(div), 5500);
+            setTimeout(() => div.setAttribute('style', '') || currentNotices.shift(), 5000);
+        }
+    }
+
+    function showPanel() {
+        document.querySelector('div#panel-container').classList.remove('hide');
+        document.querySelector('div#panel-container nav span#panel-addr').innerHTML = addr.replace(/^ws:\/\//, '');
+        setTimeout(() => {
+            document.querySelector('div#connect-container').classList.add('hide');
+            document.querySelector('div#bg-container').classList.add('hide');
+        }, 1000);
+        document.querySelector('div#panel-container nav span#panel-connection-state').setAttribute('style', 'color: #78d428');
     }
 
     /**
@@ -100,13 +119,16 @@
      */
     function onOpen() {
         createNotice(0, '连接成功');
+        document.title = `WebConsole - ${addr.replace(/^ws:\/\//, '')}`;
     }
 
     /**
      * 关闭事件处理
      */
     function onClose() {
-        createNotice(1, '连接已断开');
+        createNotice(connected ? 2 : 1, connected ? '连接已断开，请刷新页面重试' : '连接已断开', !connected);
+        document.querySelector('div#panel-container nav span#panel-connection-state').setAttribute('style', 'color: #e20');
+        document.title = 'WebConsole';
     }
 
     /**
@@ -170,7 +192,9 @@
         switch (jsonBody.sub_type) {
             case 'verify_result':
                 if (jsonBody.data.success) {
+                    showPanel();
                     createNotice(0, '验证通过');
+                    connected = true;
                 } else {
                     createNotice(2, `验证失败：${jsonBody.data.reason}`);
                 }

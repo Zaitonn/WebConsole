@@ -4,7 +4,7 @@ body {
     padding: 0;
 }
 
-:root{
+:root {
     --theme-color: #1b7bbb;
     --theme-color1: #abbac4;
     --theme-color2: #8facc0;
@@ -12,4 +12,11 @@ body {
     --theme-color4: #5196c0;
     --theme-color5: #3288bd;
     --theme-color-dark: #072030;
+    --bg: #fff;
+    --secondary-text: #072030;
+}
+
+.hide {
+    visibility: hidden;
+    pointer-events: none;
 }
