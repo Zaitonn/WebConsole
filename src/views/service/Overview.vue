@@ -1,10 +1,7 @@
 <script setup>
-import Header from '../../components/Header.vue'
+import CommonLayout from '/src/components/layout/CommonLayout.vue'
 </script>
 
 <template>
-    <Header></Header>
-    <div id="content">
-       
-    </div>
+    <CommonLayout></CommonLayout>
 </template>

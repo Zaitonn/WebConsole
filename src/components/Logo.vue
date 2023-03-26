@@ -1,5 +1,5 @@
 <template>
-    <div id="logo-container">
+    <div id="logo-container" class="no-select">
         <img alt="logo" id="icon" src="../assets/favicon.png">
         <span id="logo">WebConsole</span>
     </div>
@@ -19,7 +19,5 @@
 
 #logo {
     font-weight: bolder;
-    -webkit-user-select: none;
-    user-select: none;
 }
 </style>

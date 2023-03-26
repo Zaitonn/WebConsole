@@ -1,12 +1,11 @@
 <script setup>
-import Header from '../components/Header.vue'
+import CommonLayout from '/src/components/layout/CommonLayout.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter();
 </script>
 
 <template>
-    <Header></Header>
-    <div id="content">
+    <CommonLayout>
         <img alt="logo" src="../assets/favicon.png">
         <div id="title-container">
             <span>WebConsole</span>
@@ -18,28 +17,28 @@ const router = useRouter();
             <a href="http://serein.cc" target="_blank">Serein</a>
             打造的多功能网页控制台
         </div>
-        <div>
-            <el-tooltip content="若是第一次使用请看看这里👇" placement="top">
+        <div id="button-container">
+            <el-tooltip content="若是第一次使用请看看这里👇" placement="top-end">
                 <el-button size="large" icon="Document">查看文档</el-button>
             </el-tooltip>
-            <el-tooltip content="点此打开登录界面" placement="top">
-                <el-button type="primary" size="large" @click="router.push('/login')" icon="Position">登录</el-button>
+            <el-tooltip content="点此打开连接界面" placement="top-start">
+                <el-button type="primary" size="large" @click="router.push('/connect')" icon="Position">连接</el-button>
             </el-tooltip>
         </div>
-    </div>
+    </CommonLayout>
+    <div style="height: 100vh;">11</div>
 </template>
 
 <style scoped>
-div#content>* {
+div#content-flex>* {
     margin: 10px;
 }
 
-div#content>img {
+div#content-flex>img {
     image-rendering: pixelated;
     width: 100px;
     display: inline-block;
 }
-
 
 div#title-container {
     font-size: 40px;
@@ -53,13 +52,42 @@ div#title-container span {
 
 div#title-container span:last-child {
     color: var(--c-brand);
-    background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+    background-image: linear-gradient(30deg, #48c6ef 0%, #6f86d6 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-div#content :deep(.el-button) {
-    margin: 0 15px;
+div#description {
+    text-align: center;
+}
+
+div#content-flex :deep(.el-button) {
+    margin: 5px;
+}
+
+div#button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+    div#title-container {
+        font-size: 20px;
+    }
+
+    div#title-container span {
+        margin: 3px;
+    }
+
+    div#content-flex>img {
+        image-rendering: pixelated;
+        width: 25vw;
+        max-width: 75px;
+        display: inline-block;
+    }
 }
 </style>

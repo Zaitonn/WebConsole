@@ -1,10 +1,9 @@
 <script setup>
-import Header from '../components/Header.vue'
+import CommonLayout from '/src/components/layout/CommonLayout.vue'
 </script>
 
 <template>
-    <Header></Header>
-    <div id="content">
+    <CommonLayout>
         <div></div>
         <div>你访问的链接
             <a :href=this.$route.fullPath> {{ this.$route.fullPath }} </a>
@@ -16,13 +15,11 @@ import Header from '../components/Header.vue'
                 上一页
             </el-button>
         </div>
-    </div>
+    </CommonLayout>
 </template>
 
 <style scoped>
-
-
-div#content div:first-child {
+div#content-flex div:first-child {
     background-image: url('/src/assets/imgs/404.png');
     background-position: center;
     background-size: contain;
@@ -32,7 +29,7 @@ div#content div:first-child {
     max-height: 70%;
 }
 
-div#content div {
+div#content-flex div {
     margin: 10px;
 }
 </style>

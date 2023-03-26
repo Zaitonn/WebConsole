@@ -13,6 +13,9 @@ const handleSelect = (_, keyPath) => {
         case '1':
             router.push('/overview');
             break;
+        case '2':
+            router.push('/connect');
+            break;
         case '3-2':
             window.open('https://github.com/Zaitonn/WebConsole', 'blank');
         default:
@@ -25,7 +28,7 @@ const activeIndex = (() => {
     switch (useRoute().path.split('/')[1]) {
         case 'overview':
             return '1';
-        case 'login':
+        case 'connect':
             return '2';
         default:
             return '-1';
