@@ -5,8 +5,17 @@ body {
     height: 100%;
     color: var(--el-text-color-primary);
     transition: color 0.1s, background-color 0.1s;
-    background: var(--el-bg-color);
+    background: var(--el-fill-color-lighter2);
 }
+
+:root {
+    --el-fill-color-lighter2: #fcfcfc;
+}
+
+.dark:root {
+    --el-fill-color-lighter2: var(--el-fill-color-lighter);
+}
+
 
 a {
     color: var(--el-color-primary);
@@ -18,20 +27,31 @@ a:hover {
     background: var(--el-color-primary-light-7);
 }
 
-div#content-flex {
+div.flex {
     width: 100%;
     height: calc(100% - 60px);
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
 }
 
-div#content-flex>* {
+div.flex>* {
     margin: 5px;
 }
 
 .no-select {
     -webkit-user-select: none;
     user-select: none;
+}
+
+.detailLayout .el-radio-group {
+    flex-wrap: initial;
+}
+
+.flex-grow {
+    flex-grow: 100;
+}
+
+.no-border-bottom {
+    border-bottom: none;
 }

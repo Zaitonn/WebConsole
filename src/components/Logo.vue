@@ -4,6 +4,7 @@
         <span id="logo">WebConsole</span>
     </div>
 </template>
+
 <style scoped>
 #logo-container {
     display: flex;

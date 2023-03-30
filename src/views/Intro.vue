@@ -26,15 +26,14 @@ const router = useRouter();
             </el-tooltip>
         </div>
     </CommonLayout>
-    <div style="height: 100vh;">11</div>
 </template>
 
 <style scoped>
-div#content-flex>* {
+div.flex>* {
     margin: 10px;
 }
 
-div#content-flex>img {
+div.flex>img {
     image-rendering: pixelated;
     width: 100px;
     display: inline-block;
@@ -62,7 +61,7 @@ div#description {
     text-align: center;
 }
 
-div#content-flex :deep(.el-button) {
+div.flex :deep(.el-button) {
     margin: 5px;
 }
 
@@ -83,7 +82,7 @@ div#button-container {
         margin: 3px;
     }
 
-    div#content-flex>img {
+    div.flex>img {
         image-rendering: pixelated;
         width: 25vw;
         max-width: 75px;

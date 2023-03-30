@@ -19,7 +19,7 @@ import CommonLayout from '/src/components/layout/CommonLayout.vue'
 </template>
 
 <style scoped>
-div#content-flex div:first-child {
+div#flex div:first-child {
     background-image: url('/src/assets/imgs/404.png');
     background-position: center;
     background-size: contain;
@@ -29,7 +29,7 @@ div#content-flex div:first-child {
     max-height: 70%;
 }
 
-div#content-flex div {
+div#flex div {
     margin: 10px;
 }
 </style>
